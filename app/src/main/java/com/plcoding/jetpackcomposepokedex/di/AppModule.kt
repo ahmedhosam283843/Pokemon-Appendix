@@ -24,7 +24,7 @@ object AppModule {
     @Provides
     fun providePokemonApi(): PokemonApi {
         return Retrofit.Builder().addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(Constants.baseUrl)
+            .baseUrl(Constants.BASE_URL)
             .build()
             .create(PokemonApi::class.java)
     }

@@ -15,9 +15,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.plcoding.jetpackcomposepokedex.detailscreen.PokemonDetailScreen
 import com.plcoding.jetpackcomposepokedex.listscreen.PokemonListScreen
 import com.plcoding.jetpackcomposepokedex.ui.theme.JetpackComposePokedexTheme
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -46,8 +48,9 @@ class MainActivity : ComponentActivity() {
                             color?.let { Color(it) } ?: Color.White
                         }
                         val pokemonName = remember {
-                            it.arguments?.getString("dominantColor")
+                            it.arguments?.getString("pokemonName")
                         }
+                        PokemonDetailScreen(dominantColor = dominantColor, pokemonName = pokemonName?.lowercase()?: "", navController = navController )
 
                     }
                 }

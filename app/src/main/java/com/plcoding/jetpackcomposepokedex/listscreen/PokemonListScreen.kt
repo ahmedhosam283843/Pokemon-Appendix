@@ -58,7 +58,7 @@ fun PokemonListScreen(
                 contentDescription = "pokemon logo",
                 modifier = Modifier
                     .fillMaxWidth()
-                    .align(Alignment.CenterHorizontally)
+                    .align(CenterHorizontally)
             )
             SearchBar(
                 hint = "Search...", modifier = Modifier
@@ -127,7 +127,7 @@ fun PokemonList(
     val endReached by remember { viewModel.endReached }
     val loadError by remember { viewModel.loadError }
     val isLoading by remember { viewModel.isLoading }
-    var isSearching by remember{viewModel.isSearching}
+    val isSearching by remember{viewModel.isSearching}
 
 
     LazyColumn(contentPadding = PaddingValues(16.dp)) {
@@ -137,7 +137,9 @@ fun PokemonList(
         }
         items(itemCount) {
             if (it >= itemCount - 1 && !endReached && !isLoading  && !isSearching) {
-                viewModel.loadPokemonPaginated()
+                LaunchedEffect(key1 = true ){
+                    viewModel.loadPokemonPaginated()
+                }
             }
             PokemonRow(rowIndex = it, entries = pokemonList, navController = navController)
         }
@@ -168,7 +170,7 @@ fun PokemonListEntry(
     }
 
     Box(
-        contentAlignment = Alignment.Center,
+        contentAlignment = Center,
         modifier = modifier
             .shadow(5.dp, RoundedCornerShape(10.dp))
             .clip(RoundedCornerShape(10.dp))
@@ -204,7 +206,7 @@ fun PokemonListEntry(
                 },
                 modifier = Modifier
                     .size(120.dp)
-                    .align(Alignment.CenterHorizontally)
+                    .align(CenterHorizontally)
             )
 
             Text(
